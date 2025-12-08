@@ -295,7 +295,7 @@ git diff HEAD
 
 ### 12. Commit using the shortcut
 ```bash
-git commit -am "commit-message"
+git commit -am "COMMIT_MSG"
 ```
 
 Question: Which version got committed – the one in the Working Directory or the one in the Staging Area?
@@ -338,80 +338,155 @@ Explore commit history, logs, aliases, and tagging commits for easier reference.
 
 ## Steps
 
-### 1. Add another change
+### 1. Add another change.
+
+Let’s first make another change to the repository to make the history more interesting. Add a line to the first file you committed into the repository and then stage and
+commit. Note that you can use the shortcut here.
+
 ```bash
-echo new >> file1-name
-git commit -am "commit-message"
+echo new >> FILE1
+git commit -am "COMMIT_MSG"
 ```
 
-### 2. View history
+<br><br>
+
+### 2. View history.
+
+Now, take a look at the history we have so far in our small repository. To do this we just run the *log* command.
+
+(Note: In some terminals your history may be longer than the screen and need to hit a key to continue. If you are paging through log output and want to end the listing, hit the “q” key.)
+
 ```bash
 git log
 ```
 
-### 3. View one-line history
+<br><br>
+
+### 3. View one-line history.
+
+Often when looking at Git history information, users will only want to see the first line of each entry - the “subject line”. This is why it is important to make that first line meaningful in a real-life use of Git. To see only the first line of each log message, you can use the *--oneline* option.
+
 ```bash
 git log --oneline
 ```
 
-### 4. Use formatted log output
+<br><br>
+
+### 4. Use formatted log output.
+
+Let’s try a more complex version of the log command that includes selected pieces of history information formatted in a specific way. Be careful of your typing - note the colon after “format”, the double hyphens, and the double quotes.
+
 ```bash
 git log --pretty=format:"%h %ad|%s %d[%an]" --date=short
 ```
 
-### 5. Create a helpful alias for the formatted history
+<br><br>
+
+### 5. Create a helpful alias for the formatted history.
+
+Since this is a bit much to type, let’s create an alias to simplify running this command. We do this by configuring the alias name to stand for the command and its options. Enter the following, paying attention to the punctuation (double hypens, colon, vertical bars, single and double quotes, etc.)
+
 ```bash
 git config --global alias.hist "log --pretty=format:'%h %ad | %s%d [%an]' --date=short"
 ```
 
-### 6. Run the alias
+<br><br>
+
+### 6. Run the alias.
+
+Now run your new *hist* alias. You should see the same output as the original *log* command from step 3. If you encounter any problems, go back and double-check what you typed in step 4.
+
 ```bash
 git hist
 ```
 
-### 7. Show history for a single file
+<br><br>
+
+### 7. Show history for a single file.
+
+We can also use the log command (and our hist alias) on individual files. Pick one of your files and run the hist alias against it.
+
 ```bash
-git hist file1-name
+git hist FILE1
 ```
 
-### 8. Identify earliest & latest commit SHAs
+<br><br>
+
+### 8. Identify earliest & latest commit SHAs.
+
+Question: We're interested in seeing the differences between a couple of the revisions. But there are no version numbers. How do we pick revisions?
+Answer: We pick revisions via the SHA1 (hash) values (first 7 bytes are enough). It's the first column in the *hist* output.
+
 Run:
 ```bash
 git hist
 ```
+
 Note the SHA of:
 - The earliest commit (bottom of the list)
 - The latest commit (top of the list)
 
-### 9–10. View history between two SHAs
+![list of commits](./images/git3.png?raw=true "List of commits") 
+
+<br><br>
+
+### 9. View history between two SHAs.
+
+We can use these SHA1 values similarly to how we might use version numbers in other systems. Let’s see the history between our earliest and latest commits.
+
+To do this, we’ll run the hist alias and specify the range of values using the SHA1 values. Execute the command below, substituting the appropriate SHA1 values from the history in your repository.
+
 ```bash
-git hist earliest-SHA1..latest-SHA1
+git hist EARLIEST_SHA1..LATEST_SHA1
 ```
 
-### 11. View diff for a file across that range
+<br><br>
+
+### 10. View diff for a file across that range.
+
+You should see a similar history as you saw previously. One thing to note here is you don’t see the original (first) commit. This is because when specifying ranges via the “..” syntax, Git defines that as essentially everything after the first revision. Note that you can also run this against an individual file. Try the command below with your SHA1 values and the first file you added in the repository
+
 ```bash
-git diff earliest-SHA1..latest-SHA1 file1-name
+git diff EARLIEST_SHA1..LATEST_SHA1 FILE1
 ```
 
-### 12. Create tags for earliest and latest commits
+<br><br>
+
+### 11. Create tags for earliest and latest commits.
+
+Finding and typing SHA1 values each time for operations like this can be cumbersome. To simplify this, we can use tags to point to commits, and then use those tag names instead of the SHA1 values in commands. Let’s create tags for the earliest and latest commits in our repository. We’ll use the tags *first* and *last* respectively. The commands are below.
+
 ```bash
-git tag first earliest-SHA1
-git tag last latest-SHA1
+git tag first EARLIEST_SHA1
+git tag last LATEST_SHA1
 ```
 
-### 13. Use tags instead of SHAs in history commands
+<br><br>
+
+### 12. Use tags instead of SHAs in history commands.
+
+Now that we have the tags, we can use them anyplace we used the SHA1 values before. Try out the hist alias with the tags.
+
 ```bash
 git hist first..last
 ```
 
-### 14. Show filenames that changed
+<br><br>
+
+### 13. Show filenames that changed using the range specified by the tags.
+
+This is giving us the history for all of the files in the repository. This is because a tag applies to an entire commit - not a specific file in the commit. To see this more clearly, add the --name-only option to the command and run it again.
+
 ```bash
 git hist first..last --name-only
 ```
+<br><br>
 
-### 15. Filter by file
+### 14. Filter by file.
+
+If we only want to do an operation using a tag for one file, we can simply add that filename onto the command. Try out the example below.
 ```bash
-git hist first..last --name-only file1-name
+git hist first..last --name-only FILE1
 ```
 
 ---
