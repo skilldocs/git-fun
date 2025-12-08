@@ -512,72 +512,125 @@ Create branches, switch between them, and compare different file versions.
 
 ## Steps
 
-### 1. View existing branches
+### 1. View existing branches.
+
+Starting in the same directory as you used for Lab 3, take a look at what branches you have currently with the git branch command.
+
 ```bash
 git branch
 ```
 
-### 2. Interpret the branch list
+<br><br>
+
+### 2. Interpret the branch list.
+
 You should see:
 - `* main` — only one branch, and `main` is the current branch.
 
-### 3. Update a file on `main`
+<br><br>
+
+### 3. Update a file on `main`.
+
+Before we work with a new branch, let’s update at least one file in the `main` branch to indicate that this is the version on main so it will be easier to
+see which version we have later. To do this, we can just use a short version of the same way we have been creating and updating other files. Stage and commit it with the shortcut.
+
 ```bash
-echo "main version" >> file-name
+echo "main version" >> EXISTING_FILE
 git commit -am "main version"
 ```
 
-### 4. Create a feature branch
+<br><br>
+
+### 4. Create a feature branch.
+
+We have a new feature to work on, create a branch for the feature. 
+
 ```bash
-git branch feature-branch-name
+git branch FEATURE_BRANCH
 ```
+
+<br><br>
 
 ### 5. Verify branches
+
+Notice that the previous command created the branch but *did not switch* to it. Let’s check what branches we have and which is our current one.
+
 ```bash
 git branch
 ```
+
 You should now see:
 - `main`
-- `feature-branch-name`
+- `FEATURE_BRANCH`
 
-### 6. Switch to the feature branch
+<br><br>
+
+### 6. Switch to the feature branch. 
+
+We can now see our new branch listed. Let’s change into the `feature` branch to do some work.
+
 ```bash
-git checkout feature-branch-name
+git checkout FEATURE_BRANCH
 ```
+<br><br>
 
-### 7. Verify you are on the feature branch
+### 7. Verify you are on the feature branch.
+
+
 ```bash
 git branch
 ```
-The `*` should now be next to `feature-branch-name`.
+The `*` should now be next to `FEATURE_BRANCH`.
 
-### 8. Create a new file on the feature branch
+<br><br>
+
+### 8. Create a new file on the feature branch.
+
 ```bash
-echo some-text > new-file
+echo some-text > NEW_FILE
 ```
 
-### 9. Update an existing file to indicate the feature branch
+<br><br>
+
+### 9. Update an existing file to indicate that it is associated with the feature branch.
+
 ```bash
-echo "feature version" >> file-name
+echo "feature version" >> EXISTING_FILE
 ```
 
-### 10. Stage and commit your changes
+<br><br>
+
+### 10. Stage and commit your changes.
+
 ```bash
 git add .
 git commit -m "feature version"
 ```
 
-### 11. Switch back to `main`
+<br><br>
+
+### 11. Switch back to `main`.
+
 ```bash
 git checkout main
 ```
 
+<br><br>
+
 ### 12. Verify you're on `main`
+
 ```bash
 git branch
 ```
 
-### 13. Check file contents on `main`
+You should see `* main` in the branch list.
+
+<br><br>
+
+### 13. Check file contents on `main`.
+
+Take a look at the contents of the files and verify that they're the original ones from main.
+
 ```bash
 cat *
 ```
