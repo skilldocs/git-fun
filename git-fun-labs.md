@@ -32,6 +32,7 @@ When ready, you can create a token quickly with the direct link below. Be sure t
 In the labs, arguments in CAPS indicate placeholders for names you can pick.
 
 <br><br>
+
 ---
 
 # Lab 1 — Creating and Exploring a Git Repository & Managing Content
@@ -138,97 +139,156 @@ git commit -am "COMMIT_MSG"
 ```
 
 ---
+
 <p align="center">
 <br>[END OF LAB]<br>
 </p>
 </br></br>
----
+
+
 
 # Lab 2 — Tracking Content Through the File Status Lifecycle
 
 ## Lab Purpose
 Explore how Git tracks changes across the Working Directory, Staging Area, and Local Repository.
 
+<br><br>
+
 ## Prerequisites
 - Completed **Lab 1**
 - You are in the same repository directory used in Lab 1
+
+<br><br>
 
 ---
 
 ## Steps
 
-### 1. Check clean status
+### 1. Check clean status.
+
+Run the status command or the short form to see how it looks when you have no changes to be staged or committed.
+
 ```bash
 git status
 # or
 git status -s
 ```
 
-### 2. Create a new file
-```bash
-echo content > file3-name
-git status
-```
-Result: The file is **untracked**.
+<br><br>
 
-### 3. Stage the file
-```bash
-git add file3-name
-git status
-```
-Result: The file is now **tracked** and appears under **Changes to be committed**.
+### 2. Create a new file and view the status.
 
-### 4. Edit the file again
 ```bash
-echo change > file3-name
+echo content > FILE3
 git status
 ```
 
-Now you will see two entries for `file3-name`:
-- One under **Changes to be committed** (Staging Area version)
-- One under **Changes not staged for commit** (Working Directory version)
+Question: Is the file *tracked* or *untracked*?
 
-### 5. Diff Working Directory vs Staging Area
+Answer: It’s **untracked** - we haven’t added the initial version to Git yet.
+
+<br><br>
+
+### 3. Stage the file and check status.
+
+```bash
+git add FILE3
+git status
+```
+
+Questions: Is the file *tracked* or *untracked*? What does *Changes to be committed* mean?
+
+Answers: The file is now **tracked** - we’ve added the initial version to Git.
+**Changes to be committed** implies files exist in the Staging Area and the
+next step for them is to be committed into the Local Repository.
+
+<br><br>
+
+### 4. Edit the file again and check the status.
+
+```bash
+echo change > FILE3
+git status
+```
+
+Questions: 
+
+- Why do we see two?
+- Where is the version that’s listed as *Changes to be committed*? (Working Directory, Staging Area, or Local Repository)
+- Where is the version that’s listed as *Changes not staged for commit*? (Working Directory, Staging Area, or Local Repository)
+
+Answers: 
+- We see two because there is one version of the same file in the Working Directory and another version in the Staging Area.
+- The version that’s listed as **Changes to be committed** is in the Staging Area. The phrase implies that this version’s “next step” or “next level for promotion” is to the Local Repository via a commit.
+- The version that’s listed as **Changes not staged for commit** is in the Working Directory. The phrase implies that this version’s “next step” or “next level for promotion” is to the Staging Area, since it’s currently “not staged”.)
+
+<br><br>
+
+### 5. Do a diff between the version in the Working Directory and the version in the Staging Area.
+
 ```bash
 git diff
 ```
 
-### 6. Commit the staged version
+<br><br>
+
+### 6. Commit the staged version and do another status check.
+
 ```bash
-git commit -m "commit-message"
+git commit -m "COMMIT_MSG"
 git status
 ```
 
-### 7. Stage the modified file
+Question: Which version did we commit – the one in the Staging Area or the one in the Working Directory? (Hint: Which one is left – shows up in the status? Note
+the **Changes not staged for commit** part of the status message.)
+
+Answer: The version in the Staging Area was the one committed. The content goes through the Staging Area and then into the Local Repository.
+
+<br><br>
+
+### 7. Stage the modified file you have in your Working Directory and do a status check.
+
 ```bash
 git add .
 git status
 ```
 
-### 8. Edit the file again
+<br><br>
+
+### 8. Edit the file again in the Working Directory and do a status check.
+
 ```bash
-echo "change 2" > file3-name
+echo change 2 > FILE3
 git status
 ```
 
 Now there are three versions:
-- Local Repository version
-- Staging Area version
-- Working Directory version
+- Local Repository version (committed in step 6)
+- Staging Area version (staged in step 7)
+- Working Directory version (step 8)
 
-### 9. Diff Working Directory vs Staging Area
+ <br><br>
+
+### 9. Diff the version in the Working Directory against the version in the Staging Area.
+
 ```bash
 git diff
 ```
 
-### 10. Diff Staging Area vs Local Repository
+<br><br>
+
+### 10. Diff the version in the Staging Area against the version in the Local Repository.
+
 ```bash
 git diff --staged
 # or
 git diff --cached
 ```
 
-### 11. Diff Working Directory vs Local Repository
+<br><br>
+
+### 11. Diff the version in the Working Directory against the version in the Local Repository (the one we committed earlier).
+
 ```bash
 git diff HEAD
 ```
@@ -238,25 +298,41 @@ git diff HEAD
 git commit -am "commit-message"
 ```
 
-### 13. Verify clean state
+Question: Which version got committed – the one in the Working Directory or the one in the Staging Area?
+
+Answer: Since we used the *-am* shortcut, the version from the Working Directory was staged (over the previous version in the Staging Area) and then that version was committed into the Local Repository.
+
+<br><br>
+
+### 13. Verify that the status shows a clean state.
+
 ```bash
 git status
 ```
 
+Notice the output - we’re back to a clean Working Directory - Git has the
+latest versions of everything we’ve updated.
+
 ---
 
-## END OF LAB 2
+<p align="center">
+<br>[END OF LAB]<br>
+</p>
+</br></br>
 
----
 
 # Lab 3 — Working With Changes Over Time & Using Tags
 
 ## Lab Purpose
 Explore commit history, logs, aliases, and tagging commits for easier reference.
 
+<br><br>
+
 ## Prerequisites
 - Completed **Lab 2**
 - You are in the same repository directory used previously
+
+<br><br>
 
 ---
 
@@ -342,16 +418,20 @@ git hist first..last --name-only file1-name
 
 ## END OF LAB 3
 
----
+
 
 # Lab 4 — Working With Branches
 
 ## Lab Purpose
 Create branches, switch between them, and compare different file versions.
 
+<br><br>
+
 ## Prerequisites
 - Completed **Lab 3**
 - In the same repository directory
+
+<br><br>
 
 ---
 
@@ -430,18 +510,24 @@ Look for `main version` in the file(s). The feature-branch updates should not be
 
 ---
 
-## END OF LAB 4
+<p align="center">
+<br>[END OF LAB]<br>
+</p>
+</br></br>
 
----
 
 # Lab 5 — Practice With Merging
 
 ## Lab Purpose
 Practice merging branches, observing conflicts, and resolving them.
 
+<br><br>
+
 ## Prerequisites
 - Completed **Lab 4**
 - In the same repository directory
+
+<br><br>
 
 ---
 
@@ -539,18 +625,24 @@ git branch -d new-branch
 
 ---
 
-## END OF LAB 5
+<p align="center">
+<br>[END OF LAB]<br>
+</p>
+</br></br>
 
----
 
 # Lab 6 — Using the Complete Git Workflow With a Remote Repository
 
 ## Lab Purpose
 Fork a remote repository on GitHub, clone it locally, work with branches and rebasing, handle push rejections, and resolve them.
 
+<br><br>
+
 ## Prerequisites
 - GitHub account
 - GitHub Personal Access Token (Classic) with **repo** scope
+
+<br><br>
 
 ---
 
@@ -680,6 +772,12 @@ Refresh your fork’s GitHub page and confirm:
 - The new features (max, exp, min) are present in `calc.html` in the repository.
 
 ---
+
+<p align="center">
+<br>[END OF LAB]<br>
+</p>
+</br></br>
+
 
 # Appendix — Credential Helper / SSH Options
 
