@@ -1,33 +1,37 @@
-# Git Fundamentals — Labs (Markdown Version)
-Revision 3.9 — 10/22/25  
+# Git Fundamentals
+## Understanding and using Git effectively
+## Session labs
+## Revision 4.0 - 12/08/25
 © 2025 Brent Laster & Tech Skills Transformations LLC
 
+<br><br>
 ---
 
 ## Important Notes Before Starting
 
 **Note 1 — GitHub Personal Access Token (PAT)**  
-Before Lab 6, you must have a GitHub account **and a Personal Access Token (Classic)**.
 
-Use this link to generate one:
+Before Lab 6, you must have a GitHub account **and a Personal Access Token**. You will have a choice of a *fine-grained* token or a *classic* token. We will use *classic*.
 
-https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic
+Below is a link with detailed instructions.
 
-Be sure to enable the **repo** scope.
+[Instructions to create token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
 
-Quick link:
+When ready, you can create a token quickly with the direct link below. Be sure the **repo** scope is enabled (clicked). You will need to supply a comment, **create the token and copy it to have for later.**
 
-https://github.com/settings/tokens/new?scopes=repo
+[Quick link to initialize token](https://github.com/settings/tokens/new?scopes=repo)
 
-**Note 2 — Default Branch May Be `master`**  
-Older Git versions initialize with `master` instead of `main`.
+![Get new token](./images/git1.png?raw=true "Get new token") 
 
-If your repo uses `master`, you may substitute it throughout the labs—or rename it:
+![save new token](./images/git2.png?raw=true "Save new token") 
 
-```bash
-git branch -M main
-```
+<br><br>
 
+**Note 2 - Arguments in Capital letters**
+
+In the labs, arguments in CAPS indicate placeholders for names you can pick.
+
+<br><br>
 ---
 
 # Lab 1 — Creating and Exploring a Git Repository & Managing Content
@@ -35,68 +39,109 @@ git branch -M main
 ## Lab Purpose
 Create a new Git repository, configure your identity, add files, stage them, and commit updates.
 
+<br><br>
+
 ## Prerequisites
 - Git installed (version **2.0+**)
 - Confirm version using:
   ```bash
   git --version
   ```
+<br><br>
 
 ---
 
 ## Steps
 
-### 1. Create a working directory
+### 1. Create a working directory and change into it. This will be the directory we work in unless otherwise specified.
 ```bash
-mkdir some-dir
-cd some-dir
+mkdir WORKDIR
+cd WORKDIR
 ```
 
-### 2. Initialize a new Git repository
+<br><br>
+
+### 2. Initialize a new Git repository in the directory by running the command below.
 ```bash
 git init
 ```
-This creates a `.git` directory that stores all repository metadata.
+This creates a `.git` directory that stores all repository metadata. You are now able to start using other Git commands in the current directory.
 
-### 3. Configure your Git identity
+<br><br>
+
+### 3. Configure your Git identity. Tell Git who you are by setting your required configuration settins with the following commands.
+
+Note the double dashes before **global** since we are spelling out the option. Also, values only require quotes if there is a space in the value.
+
 ```bash
-git config --global user.name "first-name last-name"
-git config --global user.email your-email-address
+git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.email YOUR_EMAIL_ADDRESS
 ```
 
-### 4. Create content
+<br><br>
+
+### 4. Create some content to work with. 
+
+Note that for purposes of these initial labs, we just need files to work with - we don’t really care what’s in them. We can “cheat” and just echo something into a file
+via the “>” operator. In fact, the output of any command could be used to put content into a file via the “>” operator. Of course, if you prefer, you can
+certainly create files via your favorite editor instead.
+
 ```bash
-echo content > file1-name
-echo content > file2-name
+echo content > FILE1
+echo content > FILE2
 ```
 
-### 5. Stage the files
+<br><br>
+
+### 5. Stage the files with the add command. 
+
+If you prefer, you can add each file separately rather than use the ".".
+
 ```bash
 git add .
 ```
 
-### 6. Commit the files
+<br><br>
+
+### 6. Commit the files.
+
+You can use whatever commit message (comment) you want. Note the single hyphen/dash before the short form of the option.
+
 ```bash
-git commit -m "commit-message"
+git commit -m "COMMIT_MSG"
 ```
 
-### 7. Observe the commit output
+<br><br>
+
+### 7. Observe the commit output.
+
 You will see the branch name (`main`), the note `root-commit`, and the short SHA-1.
 
-### 8. Modify a file
+<br><br>
+
+### 8. Modify one of your files.
+
+We can just use the “>>” to append something tothe file’s content.
+
 ```bash
-echo more >> file1-name
+echo more >> FILE1
 ```
 
-### 9. Stage + commit using the shortcut
+<br><br>
+
+### 9. Stage + commit the modified file using the shortcut. 
+
+Note the combined short options *-am* for *-a* + *-m*.
+
 ```bash
-git commit -am "commit-message"
+git commit -am "COMMIT_MSG"
 ```
 
 ---
-
-## END OF LAB 1
-
+<p align="center">
+<br>[END OF LAB]<br>
+</p>
+</br></br>
 ---
 
 # Lab 2 — Tracking Content Through the File Status Lifecycle
