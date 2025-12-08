@@ -661,90 +661,139 @@ Practice merging branches, observing conflicts, and resolving them.
 
 ## Steps
 
-### 1. Verify clean working state
+### 1. Verify clean working state.
 ```bash
 git status
 ```
 You should see: `working tree clean`.
 
-### 2. Create a new file on `main`
+<br><br>
+
+### 2. Create a new *one-line* file on `main` with a line that identifies it as the `main` version.
+
 ```bash
-echo "some-text" > file5-name
+echo some-text > NEWFILE
 ```
 
-### 3. Stage and commit on `main`
+<br><br>
+
+### 3. Stage and commit the new file on `main`.
+
 ```bash
 git add .
 git commit -m "adding new file on main"
 ```
 
-### 4. Create a new branch (but do not switch yet)
+<br><br>
+
+### 4. Create a new branch (but do not switch to it yet).
+
 ```bash
-git branch new-branch
+git branch NEW_BRANCH
 ```
 
-### 5. Change the file on `main`
+<br><br>
+
+### 5. Change the same line in the new file on `main`.
+
 ```bash
-echo "Update on main" > file5-name
+echo "Update on main" > NEWFILE
 ```
+
+<br><br>
 
 ### 6. Stage and commit the change on `main`
+
 ```bash
 git add .
 git commit -m "update on main"
 ```
 
+<br><br>
+
 ### 7. Switch to `new-branch`
+
 ```bash
-git checkout new-branch
+git checkout NEW_BRANCH
 ```
 
-### 8. Change the same line in the same file on `new-branch`
+<br><br>
+
+### 8. Change the same line in the same file on `NEW_BRANCH`
+
 ```bash
-echo "Update on new-branch" > file5-name
+echo "Update on NEW_BRANCH" > NEWFILE
 ```
 
-### 9. Commit the change on `new-branch`
+<br><br>
+
+### 9. Commit the change on `NEW_BRANCH`
 ```bash
-git commit -am "update on new-branch"
+git commit -am "update on NEW_BRANCH"
 ```
+
+<br><br>
 
 ### 10. Switch back to `main`
 ```bash
 git checkout main
 ```
 
+<br><br>
+
 ### 11. Merge `new-branch` into `main`
+
 ```bash
-git merge new-branch
+git merge NEW_BRANCH
 ```
 
-### 12. Check status for conflicts
+<br><br>
+
+### 12. Check status for conflicts. 
+
+What is the status info that tells us we have a merge conflict?
+
 ```bash
 git status
 ```
 
-### 13. Inspect the conflict markers
+<br><br>
+
+### 13. Inspect the conflict markers.
+
 ```bash
-cat file5-name
+cat NEWFILE
 ```
+
 You should see conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`).
 
-### 14. Fix the conflict
-For simplicity, overwrite the file with a merged version:
+<br><br>
+
+### 14. *Fix* the conflict.
+
+For simplicity, just overwrite the file with a merged version:
+
 ```bash
-echo "merged version" > file5-name
+echo "merged version" > NEWFILE
 ```
 
-### 15. Stage and commit the resolved file
+<br><br>
+
+### 15. Stage and commit the resolved file.
+
 ```bash
 git commit -am "Fixed conflicts"
 ```
 
+<br><br>
+
 ### 16. Verify the merge is complete
+
 ```bash
 git status
 ```
+
+<br><br>
 
 ### 17. Delete the merged branch
 ```bash
