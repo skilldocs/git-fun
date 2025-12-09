@@ -491,7 +491,10 @@ git hist first..last --name-only FILE1
 
 ---
 
-## END OF LAB 3
+<p align="center">
+<br>[END OF LAB]<br>
+</p>
+</br></br>
 
 
 
@@ -840,12 +843,20 @@ Go to: [https://github.com/skillrepos/calc3](https://github.com/skillrepos/calc3
 ### 3. Fork the repository
 - Click **Fork** (top right).
 
+<br>
+
 ![Fork button](./images/git4.png?raw=true "Fork button")
+
+<br>
 
 - Uncheck **Copy the main branch only** so you also get other remote branches.
 - Click **Create fork**.
 
+<br>
+
 ![Finish fork](./images/git5.png?raw=true "Finish fork")
+
+<br>
 
 Your URL should now look like:
 
@@ -860,8 +871,10 @@ https://github.com/YOUR_GITHUB_USERID/calc3
 - Select the **Local** tab.
 - Unless you already have SSH set up, choose **HTTPS**.
 - Click the **copy** icon next to the HTTPS URL to copy it to your clipboard.
+  
+![Get URL](./images/git19.png?raw=true "Get URL")
 
-![Get URL](./images/git12.png?raw=true "Get URL")
+
 
 <br><br>
 
