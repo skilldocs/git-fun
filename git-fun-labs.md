@@ -964,15 +964,15 @@ You will be prompted for:
 - Username (your GitHub username)
 - A sign-in/Private Access Token or password. Wherever it asks for a token or a password, you can just copy and paste in the token you generated in GitHub prior to this lab.  An example dialog that may come up is shown below.
 
-![Sign-in dialog](./images/git13.png?raw=true "Sign-in dialog")
+![Sign-in dialog](./images/git20.png?raw=true "Sign-in dialog")
 
 If instead, you are on the command line and prompted for a password, just paste the token in at the prompt. Note that it will not show up on the line, but you can just hit enter afterwards. If you are using a Mac, a Linux system, or the Git Bash shell, it should look something like this:
 
-![Password prompt](./images/git14.png?raw=true "Password prompt")
+![Password prompt](./images/git21.png?raw=true "Password prompt")
 
 If you are using a Windows command prompt, you may have to use the command prompt's menu to do this:
 
-![Windows command prompt](./images/git15.png?raw=true "Windows command prompt")
+![Windows command prompt](./images/git22.png?raw=true "Windows command prompt")
 
 <br><br>
 
@@ -1021,8 +1021,12 @@ Refresh your fork’s GitHub page and confirm the history reflects your rebase a
 </p>
 </br></br>
 
+---
 
-![That's all](./images/git17.png?raw=true "That's all")
+<p align="center">
+<br>[END OF LABS]<br>
+</p>
+</br></br>
 
 # Appendix — Credential Helper / SSH Options
 
