@@ -741,7 +741,7 @@ git checkout main
 
 <br><br>
 
-### 11. Merge `new-branch` into `main`
+### 11. Merge `NEW_BRANCH` into `main`
 
 ```bash
 git merge NEW_BRANCH
@@ -797,7 +797,7 @@ git status
 
 ### 17. Delete the merged branch
 ```bash
-git branch -d new-branch
+git branch -d NEW_BRANCH
 ```
 
 ---
@@ -826,31 +826,34 @@ Fork a remote repository on GitHub, clone it locally, work with branches and reb
 ## Steps
 
 ### 1. Sign in to GitHub
-Go to:
-
-```text
-https://github.com
-```
+Go to: [https://github.com](https://github.com)
 
 Sign in with your GitHub account.
 
-### 2. Navigate to the `calc3` project
-Visit:
+<br><br>
 
-```text
-https://github.com/skillrepos/calc3
-```
+### 2. Navigate to the `calc3` project
+Go to: [https://github.com/skillrepos/calc3](https://github.com/skillrepos/calc3)
+
+<br><br>
 
 ### 3. Fork the repository
 - Click **Fork** (top right).
+
+![Fork button](./images/git4.png?raw=true "Fork button")
+
 - Uncheck **Copy the main branch only** so you also get other remote branches.
 - Click **Create fork**.
+
+![Finish fork](./images/git5.png?raw=true "Finish fork")
 
 Your URL should now look like:
 
 ```text
-https://github.com/your-github-userid/calc3
+https://github.com/YOUR_GITHUB_USERID/calc3
 ```
+
+<br><br>
 
 ### 4. Get the clone URL
 - On your fork page, click the green **<> Code** button.
@@ -858,14 +861,20 @@ https://github.com/your-github-userid/calc3
 - Unless you already have SSH set up, choose **HTTPS**.
 - Click the **copy** icon next to the HTTPS URL to copy it to your clipboard.
 
+![Get URL](./images/git12.png?raw=true "Get URL")
+
+<br><br>
+
 ### 5. Clone the project locally
 In your terminal:
 
 ```bash
 cd ..   # if needed, to get out of the previous lab repo
-git clone https://github.com/your-github-userid/calc3.git
+git clone https://github.com/YOUR_GITHUB_USERID/calc3.git
 cd calc3
 ```
+
+<br><br>
 
 ### 6. Confirm clone contents
 List files and ensure `.git` exists:
@@ -874,30 +883,44 @@ List files and ensure `.git` exists:
 ls -la
 ```
 
+<br><br>
+
 ### 7. Inspect remote branches
 ```bash
 git branch -r
 git branch -av
 ```
 
+<br><br>
+
 ### 8. View remote configuration
 ```bash
 git remote -v
 ```
 
+<br><br>
+
 ### 9. (Optional) Open the calculator in a browser
 Open `calc.html` in a browser and confirm it supports basic arithmetic operations.
+
+![Open calc](./images/git7.png?raw=true "Open calc")
+
+<br><br>
 
 ### 10. Create a local branch to track the remote `features` branch
 ```bash
 git branch features origin/features
 ```
 
+<br><br>
+
 ### 11. Inspect history on `main` and `features`
 ```bash
 git log --oneline          # main
 git log --oneline features # features
 ```
+
+<br><br>
 
 ### 12. Rebase `features` onto `main`
 While on `main`:
@@ -906,14 +929,18 @@ While on `main`:
 git rebase features
 ```
 
+<br><br>
+
 This applies the commits from `features` onto your local `main` branch.
 
-### 13. Inspect updated history
+### 13. Inspect updated history.
 ```bash
 git log --oneline
 ```
 
 (Optionally, open `calc.html` in a browser to see new functions such as max, min, exp, etc.)
+
+<br><br>
 
 ### 14. Push updates to your fork (expect a rejection)
 ```bash
@@ -922,31 +949,57 @@ git push -u origin main
 
 You will be prompted for:
 - Username (your GitHub username)
-- Personal Access Token (paste your PAT when asked for password/token)
+- A sign-in/Private Access Token or password. Wherever it asks for a token or a password, you can just copy and paste in the token you generated in GitHub prior to this lab.  An example dialog that may come up is shown below.
 
-You should see a **non-fast-forward** rejection error. This is expected.
+![Sign-in dialog](./images/git13.png?raw=true "Sign-in dialog")
 
-### 15. Understand the rejection
-The rebase rewrote history so your local `main` has commits that Git cannot fast-forward to on the remote. You must first bring down any remote changes and merge them.
+If instead, you are on the command line and prompted for a password, just paste the token in at the prompt. Note that it will not show up on the line, but you can just hit enter afterwards. If you are using a Mac, a Linux system, or the Git Bash shell, it should look something like this:
 
-### 16. Pull from remote with merge
+![Password prompt](./images/git14.png?raw=true "Password prompt")
+
+If you are using a Windows command prompt, you may have to use the command prompt's menu to do this:
+
+![Windows command prompt](./images/git15.png?raw=true "Windows command prompt")
+
+<br><br>
+
+### 15. You should see a **non-fast-forward** rejection error. This is expected.
+
+The *rebase* rewrote history so your local `main` has commits that Git cannot fast-forward to on the remote. You must first bring down any remote changes and merge them.
+
+NOTE: This isn’t exactly what would occur if we ran into changes by another user who got their changes in first, but you get the same experience – rejected because it can’t fast-forward.
+
+<br><br>
+
+### 16. Pull from remote with merge.
+
+To get past the rejection, we need to merge in the content from the remote. To try this, we can just do a pull operation from the remote.
+
 ```bash
 git pull --no-rebase
 ```
 
-Git may open an editor for the merge commit message. Save and close the editor to complete the merge.
+Git may open an editor for the *merge commit* message. If so, you can change it if you want, but when you are done, just close the editor.
 
-### 17. Push again (should succeed)
+<br><br>
+
+### 17. Push again (should succeed).
+
+In this case, the merge was fairly simple and should have succeeded.  Now that we are up-to-date, we can try the push again.  This time it should succeed without problems. (You’ll need to supply your username and token as before.)
+
+
 ```bash
 git push origin main
 ```
 
 Use your PAT again if prompted.
 
-### 18. Verify on GitHub
-Refresh your fork’s GitHub page and confirm:
-- The history reflects your rebase and merge.
-- The new features (max, exp, min) are present in `calc.html` in the repository.
+<br><br>
+
+### 18. Verify on GitHub.
+Refresh your fork’s GitHub page and confirm the history reflects your rebase and merge.
+
+![Windows command prompt](./images/git16.png?raw=true "Windows command prompt")
 
 ---
 
@@ -955,6 +1008,8 @@ Refresh your fork’s GitHub page and confirm:
 </p>
 </br></br>
 
+
+![That's all](./images/git17.png?raw=true "That's all")
 
 # Appendix — Credential Helper / SSH Options
 
@@ -986,6 +1041,8 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a
 
 When cloning or updating the remote URL in this case, use the **SSH** URL from the **Code** dialog.
 
+![ssh option](./images/git18.png?raw=true "ssh option")
+
 ---
 
-## END OF GIT FUNDAMENTALS LABS (Markdown Edition)
+
